@@ -5,58 +5,116 @@ import java.net.*;
 import java.util.*;
 
 public class Cliente {
+	public Cliente() throws Exception {
+		InetAddress netUsuario = InetAddress.getLocalHost();
 
-	public static void main(String[] args) {
+		System.out.println("-Conectando al servidor-");
+		try (Socket usuario = new Socket(netUsuario.getHostAddress(), 5000)) {
 
-		try {
-			InetAddress netUsuario = InetAddress.getLocalHost();
-			System.out.println("Conectando al servidor");
-			try (Socket usuario = new Socket(netUsuario.getHostAddress(), 5000)) {
+			System.out.println("Conexión establecida");
 
-				System.out.println("Conexión establecida");
+			Scanner entradaLocal = new Scanner(System.in);
+			PrintWriter salidaServidor = new PrintWriter(usuario.getOutputStream(), true);
+			Scanner entradaServidor = new Scanner(usuario.getInputStream());
 
-				Scanner entradaLocal = new Scanner(System.in);
-				Scanner entradaServidor = new Scanner(usuario.getInputStream());
-				PrintWriter salidaServidor = new PrintWriter(usuario.getOutputStream(), true);
-				String mensajeServidor = "";
+			salidaServidor.println("Ciudadano");
 
-				mensajeServidor = entradaServidor.nextLine();
-				while (entradaServidor.hasNextLine()) {
-					mensajeServidor += "\n" + entradaServidor.nextLine();
-				}
+			String serverMsg = "";
 
-				System.out.println(mensajeServidor);
+			serverMsg = entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
 
-				salidaServidor.println(entradaLocal.nextLine());
+			System.out.println(serverMsg);
 
-				while (true) {
-					mensajeServidor = "";
-					mensajeServidor = entradaServidor.nextLine();
+			salidaServidor.println(entradaLocal.nextLine());
 
-					if (mensajeServidor.equals("desconectar")) {
-						usuario.close();
-						System.exit(0);
-					} else if (mensajeServidor.equals("chat")) {
-						while (true) {
+			serverMsg = entradaServidor.nextLine();
 
-							if (mensajeServidor.equals("desconectar")) {
-								usuario.close();
-								System.exit(0);
-							}
-						}
-					}
+			if (serverMsg.equals("chat")) {
 
-					while (entradaServidor.hasNextLine()) {
-						mensajeServidor += "\n" + entradaServidor.nextLine();
-					}
+				usuario.close();
 
-					salidaServidor.println(entradaLocal.nextLine());
-				}
-			} catch (Exception e) {
-				System.out.println(e);
+				chat(usuario.getLocalAddress() + "");
 			}
-		} catch (Exception e1) {
-			System.out.println(e1);
+
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
+
+			salidaServidor.println(entradaLocal.nextLine());
+
+			serverMsg = entradaServidor.nextLine();
+			serverMsg += "\n" + entradaServidor.nextLine();
+
+			System.out.println(serverMsg);
 		}
+
 	}
+
+	public static void chat(String pNetUsuario) throws Exception {
+		InetAddress netUsuario = InetAddress.getLocalHost();
+		Socket usuarioChat = new Socket(netUsuario, 5000);
+	}
+
 }
